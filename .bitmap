@@ -15,7 +15,7 @@
         "version": "",
         "defaultScope": "org.scope-name",
         "mainFile": "index.ts",
-        "rootDir": "scope-name/actions/button",
+        "rootDir": "testing-components/actions/button",
         "config": {
             "teambit.dependencies/dependency-resolver": {},
             "teambit.compositions/compositions": {},
@@ -118,7 +118,7 @@
         "version": "",
         "defaultScope": "org.scope-name",
         "mainFile": "index.ts",
-        "rootDir": "scope-name/patterns/card",
+        "rootDir": "testing-components/patterns/card",
         "config": {
             "teambit.dependencies/dependency-resolver": {},
             "teambit.compositions/compositions": {},
