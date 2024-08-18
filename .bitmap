@@ -9,137 +9,160 @@
  */
 
 {
-    "actions/button": {
-        "name": "actions/button",
-        "scope": "",
-        "version": "",
-        "defaultScope": "org.scope-name",
-        "mainFile": "index.ts",
-        "rootDir": "testing-components/actions/button",
-        "localOnly": true,
-        "config": {
-            "teambit.dependencies/dependency-resolver": {},
-            "teambit.compositions/compositions": {},
-            "teambit.docs/docs": {},
-            "teambit.preview/preview": {},
-            "teambit.component/dev-files": {},
-            "teambit.pipelines/builder": {},
-            "teambit.component/forking": {
-                "forkedFrom": {
-                    "scope": "bitdesign.basic-react",
-                    "name": "actions/button",
-                    "version": "1.0.3"
-                }
-            },
-            "teambit.oxc/examples/envs/oxlint-env": {},
-            "teambit.envs/envs": {
-                "env": "teambit.oxc/examples/envs/oxlint-env"
-            }
+  "actions/button": {
+    "name": "actions/button",
+    "scope": "",
+    "version": "",
+    "defaultScope": "org.scope-name",
+    "mainFile": "index.ts",
+    "rootDir": "testing-components/actions/button",
+    "localOnly": true,
+    "config": {
+      "teambit.dependencies/dependency-resolver": {},
+      "teambit.compositions/compositions": {},
+      "teambit.docs/docs": {},
+      "teambit.preview/preview": {},
+      "teambit.component/dev-files": {},
+      "teambit.pipelines/builder": {},
+      "teambit.component/forking": {
+        "forkedFrom": {
+          "scope": "bitdesign.basic-react",
+          "name": "actions/button",
+          "version": "1.0.3"
         }
-    },
-    "examples/envs/oxlint-env": {
-        "name": "examples/envs/oxlint-env",
-        "scope": "",
-        "version": "",
-        "defaultScope": "teambit.oxc",
-        "mainFile": "index.ts",
-        "rootDir": "oxc/examples/envs/oxlint-env",
-        "config": {
-            "teambit.envs/env": {},
-            "teambit.envs/envs": {
-                "env": "teambit.envs/env"
-            },
-            "teambit.dependencies/dependency-resolver": {
-                "policy": {
-                    "dependencies": {
-                        "react": "^18.0.0",
-                        "@types/react": "18.2.12"
-                    }
-                }
-            },
-            "teambit.compositions/compositions": {},
-            "teambit.docs/docs": {},
-            "teambit.preview/preview": {},
-            "teambit.component/dev-files": {},
-            "teambit.pipelines/builder": {},
-            "teambit.component/forking": {
-                "forkedFrom": {
-                    "scope": "bitdesign.basic-react",
-                    "name": "envs/acme-react-env",
-                    "version": "1.0.3"
-                }
-            }
+      },
+      "teambit.oxc/examples/envs/oxlint-env": {},
+      "teambit.envs/envs": {
+        "env": "teambit.oxc/examples/envs/oxlint-env"
+      }
+    }
+  },
+  "examples/envs/oxlint-env": {
+    "name": "examples/envs/oxlint-env",
+    "scope": "",
+    "version": "",
+    "defaultScope": "teambit.oxc",
+    "mainFile": "index.ts",
+    "rootDir": "oxc/examples/envs/oxlint-env",
+    "config": {
+      "teambit.envs/env": {},
+      "teambit.envs/envs": {
+        "env": "teambit.envs/env"
+      },
+      "teambit.dependencies/dependency-resolver": {
+        "policy": {
+          "dependencies": {
+            "react": "^18.0.0",
+            "@types/react": "18.2.12"
+          }
         }
-    },
-    "linter/oxlint-linter": {
-        "name": "linter/oxlint-linter",
-        "scope": "",
-        "version": "",
-        "defaultScope": "teambit.oxc",
-        "mainFile": "index.ts",
-        "rootDir": "oxc/linter/oxlint-linter",
-        "config": {
-            "teambit.node/node@1.0.88": {},
-            "teambit.envs/envs": {
-                "env": "teambit.node/node"
-            },
-            "teambit.dependencies/dependency-resolver": {
-                "policy": {
-                    "dependencies": {
-                        "oxlint": "0.7.1"
-                    }
-                }
-            }
+      },
+      "teambit.compositions/compositions": {},
+      "teambit.docs/docs": {},
+      "teambit.preview/preview": {},
+      "teambit.component/dev-files": {},
+      "teambit.pipelines/builder": {},
+      "teambit.component/forking": {
+        "forkedFrom": {
+          "scope": "bitdesign.basic-react",
+          "name": "envs/acme-react-env",
+          "version": "1.0.3"
         }
-    },
-    "linter/oxlint-node": {
-        "name": "linter/oxlint-node",
-        "scope": "",
-        "version": "",
-        "defaultScope": "teambit.oxc",
-        "mainFile": "index.ts",
-        "rootDir": "oxc/linter/oxlint-node",
-        "config": {
-            "teambit.node/node@1.0.88": {},
-            "teambit.envs/envs": {
-                "env": "teambit.node/node"
-            },
-            "teambit.dependencies/dependency-resolver": {
-                "policy": {
-                    "dependencies": {
-                        "oxlint": "0.7.1"
-                    }
-                }
-            }
+      }
+    }
+  },
+  "linter/oxlint-linter": {
+    "name": "linter/oxlint-linter",
+    "scope": "",
+    "version": "",
+    "defaultScope": "teambit.oxc",
+    "mainFile": "index.ts",
+    "rootDir": "oxc/linter/oxlint-linter",
+    "config": {
+      "teambit.node/node@1.0.88": {},
+      "teambit.envs/envs": {
+        "env": "teambit.node/node"
+      },
+      "teambit.dependencies/dependency-resolver": {
+        "policy": {
+          "dependencies": {
+            "oxlint": "0.7.1"
+          }
         }
-    },
-    "patterns/card": {
-        "name": "patterns/card",
-        "scope": "",
-        "version": "",
-        "defaultScope": "org.scope-name",
-        "mainFile": "index.ts",
-        "rootDir": "testing-components/patterns/card",
-        "localOnly": true,
-        "config": {
-            "teambit.dependencies/dependency-resolver": {},
-            "teambit.compositions/compositions": {},
-            "teambit.docs/docs": {},
-            "teambit.preview/preview": {},
-            "teambit.component/dev-files": {},
-            "teambit.pipelines/builder": {},
-            "teambit.component/forking": {
-                "forkedFrom": {
-                    "scope": "bitdesign.basic-react",
-                    "name": "patterns/card",
-                    "version": "1.0.4"
-                }
-            },
-            "teambit.oxc/examples/envs/oxlint-env": {},
-            "teambit.envs/envs": {
-                "env": "teambit.oxc/examples/envs/oxlint-env"
-            }
+      }
+    }
+  },
+  "linter/oxlint-node": {
+    "name": "linter/oxlint-node",
+    "scope": "",
+    "version": "",
+    "defaultScope": "teambit.oxc",
+    "mainFile": "index.ts",
+    "rootDir": "oxc/linter/oxlint-node",
+    "config": {
+      "teambit.node/node@1.0.88": {},
+      "teambit.envs/envs": {
+        "env": "teambit.node/node"
+      },
+      "teambit.dependencies/dependency-resolver": {
+        "policy": {
+          "dependencies": {
+            "oxlint": "0.7.1"
+          }
         }
-    },
-    "$schema-version": "17.0.0"
+      },
+      "teambit.pkg/pkg": {
+        "packageManagerPublishArgs": ["--access public"],
+        "packageJson": {
+          "name": "@{owner}/{scope}.{name}",
+          "private": false,
+          "engines": {
+            "node": ">=16.0.0"
+          },
+          "repository": {
+            "type": "git",
+            "url": "https://github.com/teambit/oxlint-node"
+          },
+          "keywords": [
+            "bit",
+            "oxc",
+            "linter",
+            "oxlint",
+            "node",
+            "typescript",
+            "javascript"
+          ]
+        }
+      }
+    }
+  },
+  "patterns/card": {
+    "name": "patterns/card",
+    "scope": "",
+    "version": "",
+    "defaultScope": "org.scope-name",
+    "mainFile": "index.ts",
+    "rootDir": "testing-components/patterns/card",
+    "localOnly": true,
+    "config": {
+      "teambit.dependencies/dependency-resolver": {},
+      "teambit.compositions/compositions": {},
+      "teambit.docs/docs": {},
+      "teambit.preview/preview": {},
+      "teambit.component/dev-files": {},
+      "teambit.pipelines/builder": {},
+      "teambit.component/forking": {
+        "forkedFrom": {
+          "scope": "bitdesign.basic-react",
+          "name": "patterns/card",
+          "version": "1.0.4"
+        }
+      },
+      "teambit.oxc/examples/envs/oxlint-env": {},
+      "teambit.envs/envs": {
+        "env": "teambit.oxc/examples/envs/oxlint-env"
+      }
+    }
+  },
+  "$schema-version": "17.0.0"
 }
