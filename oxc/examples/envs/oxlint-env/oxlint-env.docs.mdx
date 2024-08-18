@@ -1,0 +1,84 @@
+import { EnvOverview } from '@teambit/envs.docs.env-overview-template';
+
+<EnvOverview description="This env provides a development environment for Acme's React components"
+  logo= {{
+    name: 'React 18',
+    icon: 'https://static.bit.dev/bit-dev/logos/react-2.svg',
+    background: '#144750'
+  }} 
+  tools = {{
+    developmentTools: [
+      {
+        name: 'TypeScript',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/tsconfig.json',
+        ],
+      },
+      {
+        name: 'Jest',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/jest.config.js',
+        ],
+      },
+      {
+        name: 'ESLint',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/eslintrc.js',
+        ],
+      },
+      {
+        name: 'Prettier',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/prettier.config.js',
+        ],
+      },
+    ],
+    buildPipeline: [
+      {
+        name: 'TypeScript',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/tsconfig.json',
+        ],
+      },
+      {
+        name: 'ESLint',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/eslintrc.js',
+        ],
+      },
+      {
+        name: 'Jest',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/jest.config.js',
+        ],
+      },
+    ],
+    previewsAndDocs: [
+      {
+        name: 'Component Preview',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/preview/mounter.tsx',
+        ],
+      },
+      {
+        name: 'Component Docs',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/preview/docs.tsx',
+        ],
+      },
+      {
+        name: 'Webpack',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/webpack.config.ts',
+        ],
+      },
+      {
+        name: 'Webpack Dev Server',
+        configFiles: [
+          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/webpack.config.ts',
+        ],
+      },
+    ],
+  }}
+  envId='teambit.react/react-env'
+  docsLink='https://bit.dev/docs/react-intro' />
