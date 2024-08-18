@@ -71,13 +71,13 @@
             }
         }
     },
-    "oxlint-linter": {
-        "name": "oxlint-linter",
+    "linter/oxlint-linter": {
+        "name": "linter/oxlint-linter",
         "scope": "",
         "version": "",
         "defaultScope": "teambit.oxc",
         "mainFile": "index.ts",
-        "rootDir": "oxc/oxlint-linter",
+        "rootDir": "oxc/linter/oxlint-linter",
         "config": {
             "teambit.node/node@1.0.88": {},
             "teambit.envs/envs": {
@@ -92,13 +92,13 @@
             }
         }
     },
-    "oxlint-node": {
-        "name": "oxlint-node",
+    "linter/oxlint-node": {
+        "name": "linter/oxlint-node",
         "scope": "",
         "version": "",
         "defaultScope": "teambit.oxc",
         "mainFile": "index.ts",
-        "rootDir": "oxc/oxlint-node",
+        "rootDir": "oxc/linter/oxlint-node",
         "config": {
             "teambit.node/node@1.0.88": {},
             "teambit.envs/envs": {
