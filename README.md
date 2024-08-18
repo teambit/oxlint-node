@@ -11,13 +11,24 @@ A Node.js API wrapper for the [Oxlint](https://github.com/oxlint/oxlint) project
 
 ## Table of Contents
 
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [License](#license)
+- [Oxlint Node.js API](#oxlint-nodejs-api)
+  - [⚠️ Beta Status](#️-beta-status)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Project Structure](#project-structure)
+    - [Detailed Structure:](#detailed-structure)
+  - [Installation](#installation)
+    - [Using `pnpm`](#using-pnpm)
+    - [Using `npm`](#using-npm)
+    - [Using `yarn`](#using-yarn)
+  - [Usage](#usage)
+    - [Simple Usage](#simple-usage)
+    - [Advanced Usage](#advanced-usage)
+  - [Documentation](#documentation)
+    - [Other Related Components:](#other-related-components)
+  - [Changelog and Version History](#changelog-and-version-history)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Features
 
@@ -123,6 +134,12 @@ For more comprehensive documentation, including the full API reference, please v
 
 - **Oxlint Env Example**: [bit.cloud/teambit/oxc/examples/envs/oxlint-env](https://bit.cloud/teambit/oxc/examples/envs/oxlint-env)
 - **Oxlint Linter**: [bit.cloud/teambit/oxc/linter/oxlint-linter](https://bit.cloud/teambit/oxc/linter/oxlint-linter)
+
+## Changelog and Version History
+
+Changelog and version history for this project are managed through the `oxlint-node` component's version history on Bit Cloud. You can view the full changelog at the following URL:
+
+- **Changelog**: [bit.cloud/teambit/oxc/linter/oxlint-node/~changelog](https://bit.cloud/teambit/oxc/linter/oxlint-node/~changelog)
 
 ## Contributing
 
