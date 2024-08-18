@@ -1,0 +1,7 @@
+
+.button {
+  // use design tokens as css variable across components.
+  // defaults can be used but are not necessary.
+  // overusing defaults, might cause a duplication of colors values. better to avoid.
+  color: var(--background-color);
+}

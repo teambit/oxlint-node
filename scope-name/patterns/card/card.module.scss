@@ -1,0 +1,20 @@
+
+.card {
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  // deciding what is specific to the component.
+  // in this case we decided border-radius would be specific.
+  // altough a design token might be listed for this.
+  border-radius: 8px;
+  max-width: 320px;
+  min-height: 200px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+// override styles in case by inject a class
+// to a dependency.
+.customTextStyles {
+  font-size: 18px;
+}
