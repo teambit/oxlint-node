@@ -29,7 +29,7 @@ export class OXLintLinter implements Linter {
 
     private options: OXLintOptions,
   ) {
-    
+    this.oxlintNode = OxlintNode.create(options.oxlintNodeOptions);
   }
 
   // eslint-disable-next-line react/static-property-placement
@@ -122,7 +122,7 @@ export class OXLintLinter implements Linter {
     const files = component.filesystem.files.map((file) => {
       // TODO: now that we moved to lint files, maybe it's not required anymore
       // The eslint api will not ignore extensions by default when using lintText, so we do it manually
-      if (!this.options.extensions?.includes(file.extname)) return undefined;
+      if (this.options.extensions && !this.options.extensions?.includes(file.extname)) return undefined;
       if (!capsule) return file.path;
       return path.join(capsule.path, file.relative);
     });

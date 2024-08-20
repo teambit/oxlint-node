@@ -4,4 +4,9 @@ export type OXLintOptions = {
   name?: string;
 
   oxlintNodeOptions: OXLintNodeOptions;
+
+  /**
+   * file types to lint.
+   */
+  extensions?: string[];
 };
