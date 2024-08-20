@@ -1,40 +1,36 @@
-import resolveBin from 'resolve-bin';
 import fs from 'fs-extra';
 import path from 'path';
 import { flatten, compact } from 'lodash';
 import { Linter, LinterContext, LintResults, ComponentLintResult } from '@teambit/linter';
-import { ESLint as ESLintLib } from 'eslint';
+// import { ESLint as ESLintLib } from 'eslint';
 import mapSeries from 'p-map-series';
-import objectHash from 'object-hash';
 import { Logger } from '@teambit/logger';
 import { EnvContext, EnvHandler } from '@teambit/envs';
+import { Capsule } from '@teambit/isolator';
 import { computeTsConfig } from '@teambit/typescript.typescript-compiler';
 import { BuildContext } from '@teambit/builder';
 import { Component, ComponentMap } from '@teambit/component';
+import { OxlintNode } from '@teambit/oxc.linter.oxlint-node';
 import { OXLintOptions } from './oxlint-linter-options';
-import { computeEslintConfig, computeRuntimeEslintConfig } from './get-eslint-config';
+import { computeOxlintNodeOptions } from './compute-options';
 
 function getCacheDir(rootDir: string): string {
   return path.join(rootDir, 'node_modules', '.cache');
 }
 
 export class OXLintLinter implements Linter {
+
+  private oxlintNode: OxlintNode;
+
   constructor(
     readonly id: string = 'oxlint-linter',
 
     private logger: Logger,
 
     private options: OXLintOptions,
-
-    private rawEslintConfig: ESLintLib.Options,
-
-    private rawTsConfig: Record<string, any>,
-
-    /**
-     * path to oxlint binary.
-     */
-    private binPath: string = resolveBin('oxlint')
-  ) {}
+  ) {
+    
+  }
 
   // eslint-disable-next-line react/static-property-placement
   displayName = 'OXlint';
@@ -43,31 +39,23 @@ export class OXLintLinter implements Linter {
     return JSON.stringify(this.options, null, 2);
   }
 
+  version() {
+    return this.oxlintNode.version();
+  }
+
   async lint(context: LinterContext, buildContext?: BuildContext): Promise<LintResults> {
     const longProcessLogger = this.logger.createLongProcessLogger('linting components', context.components.length);
-    let tsConfigPath;
-    if (this.rawTsConfig && context.rootDir) {
-      tsConfigPath = this.createTempTsConfigFile(
-        context.rootDir,
-        context.componentsDirMap,
-        context.envRuntime.id,
-        this.rawTsConfig
-      );
-    }
-    const runtimeConfig = computeRuntimeEslintConfig(this.rawEslintConfig, context, tsConfigPath);
-    const eslint = this.createEslint(runtimeConfig, this.ESLint);
+    const computedOptions = computeOxlintNodeOptions(this.options.oxlintNodeOptions, context);
+    this.oxlintNode = OxlintNode.create(computedOptions);
 
     const resultsP = mapSeries(context.componentsDirMap.components, async (component) => {
       longProcessLogger.logProgress(
         `component: ${component.id.toString()}, # of files: ${component.filesystem.files.length}`
       );
       const files = this.getFilesPaths(component, buildContext);
-      const lintResults = await eslint.lintFiles(files);
-
-      if (eslint && runtimeConfig.fix && lintResults) {
-        await ESLintLib.outputFixes(lintResults);
-      }
-
+      const lintResults = await this.oxlintNode.run(files);
+      console.log("🚀 ~ file: oxlint-linter.ts:60 ~ OXLintLinter ~ resultsP ~ lintResults:", lintResults)
+      throw new Error('gilad')
       const results: ESLintLib.LintResult[] = compact(flatten(lintResults));
       const formatter = await eslint.loadFormatter(this.options.formatter || 'stylish');
       const output = formatter.format(results);
@@ -127,7 +115,7 @@ export class OXLintLinter implements Linter {
   }
 
   private getFilesPaths(component: Component, buildContext?: BuildContext): string[] {
-    let capsule;
+    let capsule: Capsule | undefined;
     if (buildContext) {
       capsule = buildContext.capsuleNetwork.graphCapsules.getCapsule(component.id);
     }
@@ -138,45 +126,7 @@ export class OXLintLinter implements Linter {
       if (!capsule) return file.path;
       return path.join(capsule.path, file.relative);
     });
-    // const files = await Promise.all(filesP);
     return compact(files);
-  }
-
-  private createTempTsConfigFile(
-    rootDir: string,
-    componentDirMap: ComponentMap<string>,
-    envId: string,
-    tsConfig: Record<string, any>
-  ): string {
-    const newTsConfig = {
-      ...tsConfig,
-    };
-    const compDirs: string[] = componentDirMap.toArray().map(([, compDir]) => compDir);
-
-    if (tsConfig.include) {
-      newTsConfig.include = flatten(
-        tsConfig.include.map((includedPath) => {
-          return compDirs.map((compDir) => `../../${compDir}/${includedPath}`);
-        })
-      );
-    }
-    if (tsConfig.exclude) {
-      newTsConfig.exclude = flatten(
-        tsConfig.exclude.map((excludedPath) => {
-          return compDirs.map((compDir) => `../../${compDir}/${excludedPath}`);
-        })
-      );
-    }
-    const cacheDir = getCacheDir(rootDir);
-    const hash = objectHash(newTsConfig);
-    // We save the tsconfig with hash here to avoid creating unnecessary tsconfig files
-    // this is very important as eslint will be able to cache the tsconfig file and will not need to create another program
-    // this affects performance dramatically
-    const tempTsConfigPath = path.join(cacheDir, `bit.tsconfig.eslint.${hash}.json`);
-    if (!fs.existsSync(tempTsConfigPath)) {
-      fs.outputJSONSync(tempTsConfigPath, newTsConfig, { spaces: 2 });
-    }
-    return tempTsConfigPath;
   }
 
   private computeComponentResultsWithTotals(results: ESLintLib.LintResult[]) {
@@ -272,21 +222,9 @@ export class OXLintLinter implements Linter {
     };
   }
 
-  version() {
-    if (this.ESLint) return this.ESLint.version;
-    return ESLintLib.version;
-  }
-
   static create(options: OXLintOptions, { logger }: { logger: Logger }): Linter {
     const name = options.name || 'oxlint-linter';
-    const rawTsConfig = computeTsConfig({
-      tsconfig: options.tsconfig,
-      compilerOptions: options.compilerOptions,
-    });
-
-    const eslintConfig = computeEslintConfig(options);
-
-    return new OXLintLinter(name, logger, options, eslintConfig, rawTsConfig, options.eslint || ESLintLib);
+    return new OXLintLinter(name, logger, options);
   }
 
   static from(options: OXLintOptions): EnvHandler<Linter> {
