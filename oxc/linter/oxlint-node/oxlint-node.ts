@@ -44,6 +44,9 @@ export class OxlintNode {
           this.toCliArgs(format, paths)
         );
         result[format] = stdout;
+        if (format === 'json') {
+          result[format] = JSON.parse(stdout);
+        }
       })
     );
     return result;
