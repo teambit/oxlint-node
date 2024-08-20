@@ -4,7 +4,7 @@ import { Pipeline } from '@teambit/builder';
 import {
   resolveTypes,
   TypescriptTask,
-  TypescriptConfigWriter
+  TypescriptConfigWriter,
 } from '@teambit/typescript.typescript-compiler';
 import {
   ESLintLinter,
@@ -12,14 +12,13 @@ import {
   EslintConfigWriter,
 } from '@teambit/defender.eslint-linter';
 import { JestTask } from '@teambit/defender.jest-tester';
-import {
-  PrettierConfigWriter
-} from '@teambit/defender.prettier-formatter';
+import { PrettierConfigWriter } from '@teambit/defender.prettier-formatter';
 import { ConfigWriterList } from '@teambit/workspace-config-files';
+import { OXLintLinter } from '@teambit/oxc.linter.oxlint-linter';
 
 /**
  * Acme's React development environment.
- * Based on the Bit base React env 
+ * Based on the Bit base React env
  * */
 export class OxlintEnv extends ReactEnv {
   /* a shorthand name for the env */
@@ -33,18 +32,18 @@ export class OxlintEnv extends ReactEnv {
 
   protected eslintExtensions = ['.ts', '.tsx', '.js', '.jsx', '.mjs'];
 
-  protected previewMounter = require.resolve('./preview/mounter');
+  // protected previewMounter = require.resolve('./preview/mounter');
 
   /* the linter to use during development */
   linter() {
     /**
      * @see https://bit.dev/reference/eslint/using-eslint
      * */
-    return ESLintLinter.from({
-      tsconfig: this.tsconfigPath,
-      configPath: this.eslintConfigPath,
-      pluginsPath: __dirname,
-      extensions: this.eslintExtensions,
+    return OXLintLinter.from({
+      oxlintNodeOptions:{
+        tsconfigPath: this.tsconfigPath,
+      }
+      // extensions: this.eslintExtensions,
     });
   }
 
