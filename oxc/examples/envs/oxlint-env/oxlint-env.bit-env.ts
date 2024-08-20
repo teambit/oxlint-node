@@ -30,10 +30,6 @@ export class OxlintEnv extends ReactEnv {
 
   protected eslintConfigPath = require.resolve('./config/eslintrc.js');
 
-  protected eslintExtensions = ['.ts', '.tsx', '.js', '.jsx', '.mjs'];
-
-  // protected previewMounter = require.resolve('./preview/mounter');
-
   /* the linter to use during development */
   linter() {
     /**
