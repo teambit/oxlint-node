@@ -1,4 +1,4 @@
-import resolveBin from 'resolve-bin';
+import { resolveBin } from './resolve-bin';
 import execa from 'execa';
 import { OxlintFormat, OXLintNodeOptions } from './options';
 import { Plugins } from './plugins';
@@ -19,7 +19,7 @@ export class OxlintNode {
   ) {}
 
   async version() {
-    const {stdout: version} = await execa(this.binPath, ['--version']);
+    const { stdout: version } = await execa(this.binPath, ['--version']);
     return version;
   }
 
@@ -37,10 +37,15 @@ export class OxlintNode {
 
   async run(paths: string[] = []): Promise<OxlintMultiFormatResult> {
     const result: OxlintMultiFormatResult = {};
-    await Promise.all(this.formats.map(async (format) => {
-      const {stdout} = await execa(this.binPath, this.toCliArgs(format, paths));
-      result[format] = stdout;
-    }));
+    await Promise.all(
+      this.formats.map(async (format) => {
+        const { stdout } = await execa(
+          this.binPath,
+          this.toCliArgs(format, paths)
+        );
+        result[format] = stdout;
+      })
+    );
     return result;
   }
 
@@ -52,7 +57,7 @@ export class OxlintNode {
       this.getConfigCliArg(),
       this.getTsConfigCliArg(),
       this.getFormatCliArg(format),
-      ...paths
+      ...paths,
     ];
     return args;
   }
@@ -61,8 +66,18 @@ export class OxlintNode {
     const plugins = Plugins.from(options.pluginsFlags || {});
     const rules = Rules.from(options.rulesFlags || []);
     const fixes = Fixes.from(options.fixesFlags || {});
-    const binPath = options.binPath || resolveBin.sync('oxlint', {executable: 'oxlint'});
+    const binPath =
+      options.binPath ||
+      resolveBin('oxlint', { executable: 'oxlint', paths: [__dirname] });
 
-    return new OxlintNode(binPath, plugins, rules, fixes, options.formats, options.configPath, options.tsconfigPath);
+    return new OxlintNode(
+      binPath,
+      plugins,
+      rules,
+      fixes,
+      options.formats,
+      options.configPath,
+      options.tsconfigPath
+    );
   }
 }
