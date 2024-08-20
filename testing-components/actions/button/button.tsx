@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import classNames from 'classnames';
-import { useTheme } from '@org/scope-name.acme-theme';
 import styles from './button.module.scss';
 
 export type ButtonProps = {
@@ -23,11 +22,9 @@ export function Button({ className, children }: ButtonProps) {
   // use the `useTheme` hook to get access to design tokens in JS code.
   // using colors using design tokens, helps keep components implantation
   // agnostic to colors.
-  const { primaryColor } = useTheme();
 
   return (
     <button
-      style={{ background: primaryColor }}
       type="button"
       // use classnames to allow consumers of the component to
       // override its styles in case it is required.
