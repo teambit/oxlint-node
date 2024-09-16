@@ -33,8 +33,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.8(react@18.3.1)
       '@teambit/envs.docs.env-overview-template':
-        specifier: ^0.0.2
-        version: 0.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.0.5
+        version: 0.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@teambit/mdx.ui.mdx-scope-context':
         specifier: 1.0.0
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -365,8 +365,8 @@ importers:
         version: 6.8.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@teambit/envs.docs.env-overview-template':
-        specifier: ^0.0.2
-        version: 0.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.0.5
+        version: 0.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/jest':
         specifier: ^26.0.0
         version: 26.0.24
@@ -2981,8 +2981,8 @@ packages:
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
 
-  '@teambit/envs.docs.env-overview-template@0.0.2':
-    resolution: {integrity: sha512-LAfqj3GD4965A7mowfeeDMtwK26INjp1tjFl5rapK/HcERqpVevloYuw4iLcLy8wxyaySrGDy0dMiSVB0aaIaw==}
+  '@teambit/envs.docs.env-overview-template@0.0.5':
+    resolution: {integrity: sha512-mLOCgJChreE61P367hsdeldQ0FETCLt4Orlr2a7nqRMOk6cj6E03IQwEYxo0xmbIxyreZeGD69pkcaGift3ilA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
@@ -17422,7 +17422,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@teambit/envs.docs.env-overview-template@0.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@teambit/envs.docs.env-overview-template@0.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       core-js: 3.38.0
       react: 18.3.1
