@@ -1,6 +1,6 @@
 import { EnvOverview } from '@teambit/envs.docs.env-overview-template';
 
-<EnvOverview description="This env provides a development environment for Acme's React components"
+<EnvOverview description="This env provides an example of how to use oxlint in a Bit environment"
   logo= {{
     name: 'React 18',
     icon: 'https://static.bit.dev/bit-dev/logos/react-2.svg',
@@ -21,10 +21,8 @@ import { EnvOverview } from '@teambit/envs.docs.env-overview-template';
         ],
       },
       {
-        name: 'ESLint',
-        configFiles: [
-          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/eslintrc.js',
-        ],
+        name: 'oxlint',
+        configFiles: []
       },
       {
         name: 'Prettier',
@@ -41,10 +39,8 @@ import { EnvOverview } from '@teambit/envs.docs.env-overview-template';
         ],
       },
       {
-        name: 'ESLint',
-        configFiles: [
-          'https://new.bit.cloud/org.scope-name/envs/oxlint-env/~code/config/eslintrc.js',
-        ],
+        name: 'oxlint',
+        configFiles: [],
       },
       {
         name: 'Jest',
@@ -80,5 +76,5 @@ import { EnvOverview } from '@teambit/envs.docs.env-overview-template';
       },
     ],
   }}
-  envId='teambit.react/react-env'
+  envId='bitdev.oxc/examples/envs/oxlint-env'
   docsLink='https://bit.dev/docs/react-intro' />
