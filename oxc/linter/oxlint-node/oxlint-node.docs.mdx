@@ -3,8 +3,66 @@ labels: ['Oxlint', 'module']
 description: 'A Node.js wrapper around oxlint binary.'
 ---
 
-A oxlintNode module.
+## Installation
 
-```ts
-oxlintNode();
+To install the Oxlint Node.js API, you can use `pnpm`, `npm`, or `yarn`.
+
+### Using `pnpm`
+
+```bash
+pnpm add @teambit/oxc.linter.oxlint-node
 ```
+
+### Using `npm`
+
+```bash
+npm install @teambit/oxc.linter.oxlint-node
+```
+
+### Using `yarn`
+
+```bash
+yarn add @teambit/oxc.linter.oxlint-node
+```
+
+## Usage
+
+### Simple Usage
+
+```javascript
+import { OxlintNode } from '@teambit/oxc.linter.oxlint-node';
+
+const oxlintNode = OxlintNode.create({});
+const result = await oxlintNode.run(['paths']);
+console.log(result);
+```
+
+### Advanced Usage
+
+```javascript
+const oxlintNode = OxlintNode.create({
+  binPath: 'path to oxlint binary',
+  formats: ['json', 'default'],
+  configPath: 'path to oxlint config file',
+  tsconfigPath: 'path to tsconfig',
+  pluginsFlags: {
+    'plugin-name': true,
+  },
+  rulesFlags: [{
+    name: 'rule-name',
+    severity: 'warn',
+  }],
+  fixesFlags: {
+    all: true,
+  }
+});
+```
+
+### Other Related Components:
+
+- **Oxlint Env Example**: [bit.cloud/teambit/oxc/examples/envs/oxlint-env](https://bit.cloud/teambit/oxc/examples/envs/oxlint-env)
+- **Oxlint Linter**: [bit.cloud/teambit/oxc/linter/oxlint-linter](https://bit.cloud/teambit/oxc/linter/oxlint-linter)
+
+## Contributing
+
+We welcome contributions! Please read our [Contributing Guide](https://github.com/teambit/oxlint-node/blob/main/CONTRIBUTING.md) to get started.
