@@ -60,6 +60,7 @@
         "@teambit/typescript.typescript-compiler": "^2.0.6",
         "@types/find-root": "^1.1.4",
         "@types/fs-extra": "^11.0.4",
+        "@types/lodash": "^4.17.7",
         "@types/resolve-bin": "^0.4.3",
         "@typescript-eslint/eslint-plugin": "5.35.1",
         "classnames": "^2.3.1",
