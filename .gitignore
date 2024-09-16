@@ -1,6 +1,7 @@
 # Bit
 .bit
 public
+.eslintrc.json
 
 # Logs
 logs
