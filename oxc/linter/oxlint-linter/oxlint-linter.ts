@@ -11,10 +11,6 @@ import { OxlintNode } from '@teambit/oxc.linter.oxlint-node';
 import { OXLintOptions } from './oxlint-linter-options';
 import { computeOxlintNodeOptions } from './compute-options';
 
-function getCacheDir(rootDir: string): string {
-  return path.join(rootDir, 'node_modules', '.cache');
-}
-
 type OxLintJsonLabel = {
   label: string,
   span: {
