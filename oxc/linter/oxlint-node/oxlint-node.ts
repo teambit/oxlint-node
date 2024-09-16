@@ -5,7 +5,7 @@ import { Plugins } from './plugins';
 import { Rules } from './rules';
 import { Fixes } from './fixes';
 
-export type OxlintMultiFormatResult = Partial<Record<OxlintFormat, string>>;
+export type OxlintMultiFormatResult = Partial<Record<OxlintFormat, any>>;
 
 export class OxlintNode {
   constructor(

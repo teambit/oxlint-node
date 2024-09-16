@@ -1,21 +1,38 @@
-import fs from 'fs-extra';
 import path from 'path';
-import { flatten, compact } from 'lodash';
+import { compact } from 'lodash';
 import { Linter, LinterContext, LintResults, ComponentLintResult } from '@teambit/linter';
-// import { ESLint as ESLintLib } from 'eslint';
 import mapSeries from 'p-map-series';
 import { Logger } from '@teambit/logger';
 import { EnvContext, EnvHandler } from '@teambit/envs';
 import { Capsule } from '@teambit/isolator';
-import { computeTsConfig } from '@teambit/typescript.typescript-compiler';
 import { BuildContext } from '@teambit/builder';
-import { Component, ComponentMap } from '@teambit/component';
+import { Component } from '@teambit/component';
 import { OxlintNode } from '@teambit/oxc.linter.oxlint-node';
 import { OXLintOptions } from './oxlint-linter-options';
 import { computeOxlintNodeOptions } from './compute-options';
 
 function getCacheDir(rootDir: string): string {
   return path.join(rootDir, 'node_modules', '.cache');
+}
+
+type OxLintJsonLabel = {
+  label: string,
+  span: {
+    offset: number
+    length: number
+  }
+}
+
+type OxLintJsonEntry = {
+  message: string,
+  code: string,
+  severity: string,
+  causes: [],
+  url: string,
+  help: string,
+  filename: string,
+  labels: OxLintJsonLabel[],
+  related: []
 }
 
 export class OXLintLinter implements Linter {
@@ -53,33 +70,10 @@ export class OXLintLinter implements Linter {
         `component: ${component.id.toString()}, # of files: ${component.filesystem.files.length}`
       );
       const files = this.getFilesPaths(component, buildContext);
-      const lintResults = await this.oxlintNode.run(files);
-      console.log("🚀 ~ file: oxlint-linter.ts:60 ~ OXLintLinter ~ resultsP ~ lintResults:", lintResults)
-      throw new Error('gilad')
-      const results: ESLintLib.LintResult[] = compact(flatten(lintResults));
-      const formatter = await eslint.loadFormatter(this.options.formatter || 'stylish');
-      const output = formatter.format(results);
-      const {
-        totalErrorCount,
-        totalFatalErrorCount,
-        totalFixableErrorCount,
-        totalFixableWarningCount,
-        totalWarningCount,
-        componentsResults,
-        isClean
-      } = this.computeComponentResultsWithTotals(results);
 
-      return {
-        component,
-        output,
-        totalErrorCount,
-        totalFatalErrorCount,
-        totalFixableErrorCount,
-        totalFixableWarningCount,
-        totalWarningCount,
-        isClean,
-        results: componentsResults,
-      };
+      const lintResults = await this.oxlintNode.run(files);
+      const componentResult = this.computeComponentResultsWithTotals(component, lintResults.json, lintResults.default);
+      return componentResult;
     });
 
     const results = (await resultsP) as any as ComponentLintResult[];
@@ -120,8 +114,6 @@ export class OXLintLinter implements Linter {
       capsule = buildContext.capsuleNetwork.graphCapsules.getCapsule(component.id);
     }
     const files = component.filesystem.files.map((file) => {
-      // TODO: now that we moved to lint files, maybe it's not required anymore
-      // The eslint api will not ignore extensions by default when using lintText, so we do it manually
       if (this.options.extensions && !this.options.extensions?.includes(file.extname)) return undefined;
       if (!capsule) return file.path;
       return path.join(capsule.path, file.relative);
@@ -129,40 +121,56 @@ export class OXLintLinter implements Linter {
     return compact(files);
   }
 
-  private computeComponentResultsWithTotals(results: ESLintLib.LintResult[]) {
+  private computeComponentResultsWithTotals(component: Component, results: OxLintJsonEntry[], output: string): ComponentLintResult {
+    const files: Record<string, any> = {};
     let totalErrorCount = 0;
     let totalFatalErrorCount = 0;
     let totalFixableErrorCount = 0;
     let totalFixableWarningCount = 0;
     let totalWarningCount = 0;
-    const componentsResults = results.map((result) => {
-      totalErrorCount += result.errorCount ?? 0;
-      // @ts-ignore - missing from the @types/eslint lib
-      totalFatalErrorCount += result.fatalErrorCount ?? 0;
-      totalFixableErrorCount += result.fixableErrorCount ?? 0;
-      totalFixableWarningCount += result.fixableWarningCount ?? 0;
-      totalWarningCount += result.warningCount ?? 0;
+    results.reduce((acc, result) => {
+      totalErrorCount += result.severity === 'error' ? 1 : 0;
+      totalWarningCount += result.severity === 'warning' ? 1 : 0;
+
+      if (!files[result.filename]) {
+        files[result.filename] = {
+          errorCount: 0,
+          warningCount: 0,
+          messages: [],
+          raw: []
+        };
+      }
+      const file = files[result.filename];
+      file.errorCount += result.severity === 'error' ? 1 : 0;
+      file.warningCount += result.severity === 'warning' ? 1 : 0;
+      file.messages.push({
+        severity: result.severity,
+        message: result.message,
+        suggestions: [result.help],
+        // TODO: calculate the line and column based on offset and length
+      });
+      file.raw.push(JSON.parse(JSON.stringify(result)));
+      
+      return acc;
+    }, files);
+
+    const filesResults = Object.entries(files).map(([filePath, fileResults]) => {
       return {
-        filePath: result.filePath,
-        errorCount: result.errorCount,
-        // @ts-ignore - missing from the @types/eslint lib
-        fatalErrorCount: result.fatalErrorCount,
-        fixableErrorCount: result.fixableErrorCount,
-        fixableWarningCount: result.fixableWarningCount,
-        warningCount: result.warningCount,
-        messages: result.messages,
-        raw: result,
+        filePath,
+        ...fileResults
       };
-    });
+    })
     const isClean = totalErrorCount === 0 && totalWarningCount === 0 && totalFatalErrorCount === 0;
 
     return {
+      component, 
+      output,
       totalErrorCount,
       totalFatalErrorCount,
       totalFixableErrorCount,
       totalFixableWarningCount,
       totalWarningCount,
-      componentsResults,
+      results: filesResults,
       isClean
     };
   }
