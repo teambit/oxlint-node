@@ -1,5 +1,5 @@
-import { resolveBin } from './resolve-bin';
 import execa from 'execa';
+import { resolveBin } from './resolve-bin';
 import { OxlintFormat, OxlintNodeOptions } from './options';
 import { Plugins } from './plugins';
 import { Rules } from './rules';

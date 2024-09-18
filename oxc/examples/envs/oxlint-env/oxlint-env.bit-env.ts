@@ -7,9 +7,7 @@ import {
   TypescriptConfigWriter,
 } from '@teambit/typescript.typescript-compiler';
 import {
-  ESLintLinter,
-  EslintTask,
-  EslintConfigWriter,
+  EslintConfigWriter
 } from '@teambit/defender.eslint-linter';
 import { JestTask } from '@teambit/defender.jest-tester';
 import { PrettierConfigWriter } from '@teambit/defender.prettier-formatter';

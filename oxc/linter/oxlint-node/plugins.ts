@@ -17,6 +17,7 @@ export type PluginsNames = keyof PluginsFlags;
 
 export class Plugins {
   pluginsEnabledByDefault: PluginsNames[] = ['react', 'unicorn', 'oxc', 'typescript'];
+  
   constructor(public flags: PluginsFlags) {}
 
   toCliArgs(): string[] {

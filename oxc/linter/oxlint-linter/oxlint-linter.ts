@@ -120,9 +120,9 @@ export class OxlintLinter implements Linter {
   private computeComponentResultsWithTotals(component: Component, results: OxLintJsonEntry[], output: string): ComponentLintResult {
     const files: Record<string, any> = {};
     let totalErrorCount = 0;
-    let totalFatalErrorCount = 0;
-    let totalFixableErrorCount = 0;
-    let totalFixableWarningCount = 0;
+    const totalFatalErrorCount = 0;
+    const totalFixableErrorCount = 0;
+    const totalFixableWarningCount = 0;
     let totalWarningCount = 0;
     results.reduce((acc, result) => {
       totalErrorCount += result.severity === 'error' ? 1 : 0;

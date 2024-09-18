@@ -10,7 +10,7 @@ export function resolveBin(
     paths = [process.cwd()],
   }: { executable?: string; paths?: string[] } = {}
 ): string {
-  let packageJsonPath, rootDir;
+  let rootDir;
   try {
     const resolved = require.resolve(moduleName, { paths });
     rootDir = findRoot(resolved);
@@ -18,7 +18,7 @@ export function resolveBin(
     const modJson = require.resolve(`${moduleName}/package.json`, { paths });
     rootDir = path.dirname(modJson);
   }
-  packageJsonPath = path.join(rootDir, 'package.json');
+  const packageJsonPath = path.join(rootDir, 'package.json');
 
   const packageJson = fs.readJsonSync(packageJsonPath);
   if (!packageJson.bin) {
