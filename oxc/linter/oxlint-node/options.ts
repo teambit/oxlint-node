@@ -4,7 +4,7 @@ import { RulesFlags } from './rules';
 
 export type OxlintFormat = 'default' | 'json' | 'unix' | 'checkstyle' | 'github';
 
-export type OXLintNodeOptions = {
+export type OxlintNodeOptions = {
   /**
    * path to oxlint config file to use during linting
    */

@@ -1,2 +1,2 @@
 export { OxlintNode } from './oxlint-node';
-export type { OXLintNodeOptions } from './options';
+export type { OxlintNodeOptions } from './options';

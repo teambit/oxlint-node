@@ -1,9 +1,9 @@
 import { LinterTask, LinterTaskOptions } from '@teambit/defender.linter-task';
 import { TaskHandler } from '@teambit/builder';
-import { OXLintLinter } from './oxlint-linter';
-import { OXLintOptions } from './oxlint-linter-options';
+import { OxlintLinter } from './oxlint-linter';
+import { OxlintOptions } from './oxlint-linter-options';
 
-export type OXlintTaskOptions = OXLintOptions &
+export type OXlintTaskOptions = OxlintOptions &
   Pick<LinterTaskOptions, 'description'>;
 
 /**
@@ -18,7 +18,7 @@ export const OxlintTask = {
       ...options,
       name,
       description,
-      linter: OXLintLinter.from(options),
+      linter: OxlintLinter.from(options),
     });
   },
 };

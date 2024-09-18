@@ -1,6 +1,6 @@
 import { resolveBin } from './resolve-bin';
 import execa from 'execa';
-import { OxlintFormat, OXLintNodeOptions } from './options';
+import { OxlintFormat, OxlintNodeOptions } from './options';
 import { Plugins } from './plugins';
 import { Rules } from './rules';
 import { Fixes } from './fixes';
@@ -65,7 +65,7 @@ export class OxlintNode {
     return args;
   }
 
-  static create(options: OXLintNodeOptions): OxlintNode {
+  static create(options: OxlintNodeOptions): OxlintNode {
     const plugins = Plugins.from(options.pluginsFlags || {});
     const rules = Rules.from(options.rulesFlags || []);
     const fixes = Fixes.from(options.fixesFlags || {});

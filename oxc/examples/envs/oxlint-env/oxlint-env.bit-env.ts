@@ -14,7 +14,7 @@ import {
 import { JestTask } from '@teambit/defender.jest-tester';
 import { PrettierConfigWriter } from '@teambit/defender.prettier-formatter';
 import { ConfigWriterList } from '@teambit/workspace-config-files';
-import { OXLintLinter, OxlintTask } from '@teambit/oxc.linter.oxlint-linter';
+import { OxlintLinter, OxlintTask } from '@teambit/oxc.linter.oxlint-linter';
 
 /**
  * Acme's React development environment.
@@ -35,7 +35,7 @@ export class OxlintEnv extends ReactEnv {
     /**
      * @see https://bit.dev/reference/eslint/using-eslint
      * */
-    return OXLintLinter.from({
+    return OxlintLinter.from({
       oxlintNodeOptions:{
         tsconfigPath: this.tsconfigPath,
       }

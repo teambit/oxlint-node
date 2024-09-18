@@ -1,9 +1,9 @@
-import type { OXLintNodeOptions } from '@teambit/oxc.linter.oxlint-node';
+import type { OxlintNodeOptions } from '@teambit/oxc.linter.oxlint-node';
 
-export type OXLintOptions = {
+export type OxlintOptions = {
   name?: string;
 
-  oxlintNodeOptions: OXLintNodeOptions;
+  oxlintNodeOptions: OxlintNodeOptions;
 
   /**
    * file types to lint.

@@ -8,7 +8,7 @@ import { Capsule } from '@teambit/isolator';
 import { BuildContext } from '@teambit/builder';
 import { Component } from '@teambit/component';
 import { OxlintNode } from '@teambit/oxc.linter.oxlint-node';
-import { OXLintOptions } from './oxlint-linter-options';
+import { OxlintOptions } from './oxlint-linter-options';
 import { computeOxlintNodeOptions } from './compute-options';
 
 type OxLintJsonLabel = {
@@ -31,7 +31,7 @@ type OxLintJsonEntry = {
   related: []
 }
 
-export class OXLintLinter implements Linter {
+export class OxlintLinter implements Linter {
 
   private oxlintNode: OxlintNode;
 
@@ -40,7 +40,7 @@ export class OXLintLinter implements Linter {
 
     private logger: Logger,
 
-    private options: OXLintOptions,
+    private options: OxlintOptions,
   ) {
     this.oxlintNode = OxlintNode.create(options.oxlintNodeOptions);
   }
@@ -226,15 +226,15 @@ export class OXLintLinter implements Linter {
     };
   }
 
-  static create(options: OXLintOptions, { logger }: { logger: Logger }): Linter {
+  static create(options: OxlintOptions, { logger }: { logger: Logger }): Linter {
     const name = options.name || 'oxlint-linter';
-    return new OXLintLinter(name, logger, options);
+    return new OxlintLinter(name, logger, options);
   }
 
-  static from(options: OXLintOptions): EnvHandler<Linter> {
+  static from(options: OxlintOptions): EnvHandler<Linter> {
     return (context: EnvContext) => {
       const logger = context.createLogger(options.name || 'oxlint-linter');
-      return OXLintLinter.create(options, { logger });
+      return OxlintLinter.create(options, { logger });
     };
   }
 }
