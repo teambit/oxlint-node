@@ -53,6 +53,7 @@
         "@bitdesign/basic-react.typography.text": "^1.0.3",
         "@teambit/defender.eslint-linter": "^1.0.7",
         "@teambit/defender.jest-tester": "^1.0.2",
+        "@teambit/defender.linter-task": "^1.0.7",
         "@teambit/defender.prettier-formatter": "^1.0.2",
         "@teambit/dependencies.modules.packages-excluder": "^1.0.1",
         "@teambit/envs.docs.env-overview-template": "^0.0.5",

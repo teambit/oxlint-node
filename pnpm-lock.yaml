@@ -26,6 +26,9 @@ importers:
       '@teambit/defender.jest-tester':
         specifier: ^1.0.2
         version: 1.0.28(@babel/traverse@7.25.3)(@types/node@18.19.44)(babel-plugin-macros@3.1.0)
+      '@teambit/defender.linter-task':
+        specifier: ^1.0.7
+        version: 1.0.7
       '@teambit/defender.prettier-formatter':
         specifier: ^1.0.2
         version: 1.0.19(react-dom@18.3.1(react@18.3.1))
