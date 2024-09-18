@@ -3,7 +3,7 @@ import { OxlintNode } from './oxlint-node';
 it('renders with the correct version', async () => {
   const oxlintNode = OxlintNode.create({});
   const version = await oxlintNode.version();
-  expect(version).toContain('dev');
+  expect(version).toContain('0.9.5');
 });
 
 describe('run', () => {
