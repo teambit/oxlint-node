@@ -1,0 +1,47 @@
+# Oxc Scope
+
+Welcome to the **Oxc Scope**, a dedicated space for tools built around the [Oxc](https://oxc.rs/) project. This scope focuses on providing a set of Node.js wrappers around Oxc tools, enabling seamless integration of Oxc functionalities in JavaScript/TypeScript projects.
+
+## Purpose
+
+The Oxc Scope provides:
+
+- **Node.js Wrappers**: Node.js wrappers around Oxc tools to allow their usage in JavaScript/TypeScript environments.
+- **Bit Services Integration**: Usage examples of Bit services that utilize these Node.js wrappers.
+- **Bit Dev Environments**: Custom Bit development environments leveraging Oxc tools to enhance developer workflows.
+
+At the moment, this scope contains an end-to-end example of the **Oxlinter**, a Rust-based linter, wrapped for Node.js and integrated into Bit services.
+
+## Features
+
+- 📦 **Node.js Wrappers**: Use Oxc tools like Oxlint directly in your Node.js projects.
+- 🔧 **Bit Services**: Leverage Bit services and components built around these Node.js wrappers for seamless integration.
+- 🌐 **Bit Dev Environments**: Custom Bit development environments to improve your component-driven development experience.
+
+## Scope Structure
+
+Here’s an overview of the current Scope structure:
+
+### [linter/oxlint-node](https://bit.cloud/teambit/oxc/linter/oxlint-node)
+
+A Node.js wrapper for Oxlint. It allows Node.js applications to leverage Oxlint's powerful linting capabilities. This wrapper abstracts the Rust-based Oxlint, providing a simple interface for usage in JavaScript/TypeScript environments.
+
+### [linter/oxlint-linter]((https://bit.cloud/teambit/oxc/linter/oxlint-linter))
+
+A Bit linter built on top of the `oxlint-node` wrapper. It serves as both a utility and an example for how to integrate Oxlint with Bit for component-based development. Developers can use this linter to validate code quality for their Bit components.
+
+### [examples/envs/oxlint-env](https://bit.cloud/teambit/oxc/examples/envs/oxlint-env)
+
+An environment setup that uses the `oxlint-linter`. This environment allows developers to run linting on Bit components in their projects. It's a practical example demonstrating how to integrate Oxlint and ensure linting in a Bit-based development workflow.
+
+## Future Plans
+
+This scope is continuously evolving, with plans to add more Oxc tools and their respective Node.js wrappers. The aim is to make it easy for JavaScript/TypeScript developers to integrate these high-performance tools into their workflows.
+
+## Contributing
+
+Contributions are welcome through Bit Cloud change requests. If you'd like to contribute, please submit a change request via Bit Cloud.
+
+---
+
+Made with ❤️ by [Team Bit](https://bit.cloud).

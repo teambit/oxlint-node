@@ -86,5 +86,12 @@
             }
         }
     },
+    "readme": {
+        "name": "readme",
+        "scope": "teambit.oxc",
+        "version": "0.0.2",
+        "mainFile": "index.ts",
+        "rootDir": "oxc/readme"
+    },
     "$schema-version": "17.0.0"
 }
