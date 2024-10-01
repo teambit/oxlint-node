@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![NPM Version](https://img.shields.io/npm/v/@teambit/oxc.linter.oxlint-node)](https://www.npmjs.com/package/@teambit/oxc.linter.oxlint-node)
 
-A Node.js API wrapper for the [Oxlint](https://github.com/oxlint/oxlint) project, a fast and reliable Rust-based linter. This repository also includes various examples and Bit components that demonstrate how to integrate and use Oxlint in real-world applications.
+A Node.js API wrapper for the [Oxlint](https://oxc.rs/docs/guide/usage/linter) project, a fast and reliable Rust-based linter. This repository also includes various examples and Bit components that demonstrate how to integrate and use Oxlint in real-world applications.
 
 ## ⚠️ Beta Status
 
