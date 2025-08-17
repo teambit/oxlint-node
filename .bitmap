@@ -40,21 +40,21 @@
     "examples/envs/oxlint-env": {
         "name": "examples/envs/oxlint-env",
         "scope": "teambit.oxc",
-        "version": "0.0.1",
+        "version": "1.0.0",
         "mainFile": "index.ts",
         "rootDir": "oxc/examples/envs/oxlint-env"
     },
     "linter/oxlint-linter": {
         "name": "linter/oxlint-linter",
         "scope": "teambit.oxc",
-        "version": "0.0.1",
+        "version": "1.0.0",
         "mainFile": "index.ts",
         "rootDir": "oxc/linter/oxlint-linter"
     },
     "linter/oxlint-node": {
         "name": "linter/oxlint-node",
         "scope": "teambit.oxc",
-        "version": "0.0.1",
+        "version": "1.0.0",
         "mainFile": "index.ts",
         "rootDir": "oxc/linter/oxlint-node"
     },

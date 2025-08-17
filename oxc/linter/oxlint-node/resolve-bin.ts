@@ -14,7 +14,7 @@ export function resolveBin(
   try {
     const resolved = require.resolve(moduleName, { paths });
     rootDir = findRoot(resolved);
-  } catch (e) {
+  } catch {
     const modJson = require.resolve(`${moduleName}/package.json`, { paths });
     rootDir = path.dirname(modJson);
   }

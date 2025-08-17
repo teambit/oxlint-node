@@ -39,9 +39,10 @@ export class OxlintNode {
     const result: OxlintMultiFormatResult = {};
     await Promise.all(
       this.formats.map(async (format) => {
+        const args = this.toCliArgs(format, paths);
         const { stdout } = await execa(
           this.binPath,
-          this.toCliArgs(format, paths)
+          args
         );
         result[format] = stdout;
         if (format === 'json') {
@@ -54,15 +55,15 @@ export class OxlintNode {
 
   toCliArgs(format: OxlintFormat, paths: string[] = []): string[] {
     const args = [
+      ...paths,
       ...this.plugins.toCliArgs(),
       ...this.rules.toCliArgs(),
       ...this.fixes.toCliArgs(),
       this.getConfigCliArg(),
       this.getTsConfigCliArg(),
       this.getFormatCliArg(format),
-      ...paths,
     ];
-    return args;
+    return args.filter(Boolean);
   }
 
   static create(options: OxlintNodeOptions): OxlintNode {

@@ -19,7 +19,15 @@ type OxLintJsonLabel = {
   }
 }
 
-type OxLintJsonEntry = {
+type OxLintJsonResult = {
+  diagnostics: OxLintJsonDiagnostic[],
+  number_of_files: number
+  number_of_rules: number,
+  threads_count: number,
+  start_time: number,
+}
+
+type OxLintJsonDiagnostic = {
   message: string,
   code: string,
   severity: string,
@@ -52,6 +60,8 @@ export class OxlintLinter implements Linter {
     return JSON.stringify(this.options, null, 2);
   }
 
+  // @ts-ignore Fixed in bit, need to be remove once this is merged and out
+  // https://github.com/teambit/bit/pull/9935
   version() {
     return this.oxlintNode.version();
   }
@@ -117,14 +127,14 @@ export class OxlintLinter implements Linter {
     return compact(files);
   }
 
-  private computeComponentResultsWithTotals(component: Component, results: OxLintJsonEntry[], output: string): ComponentLintResult {
+  private computeComponentResultsWithTotals(component: Component, jsonResult: OxLintJsonResult, output: string): ComponentLintResult {
     const files: Record<string, any> = {};
     let totalErrorCount = 0;
     const totalFatalErrorCount = 0;
     const totalFixableErrorCount = 0;
     const totalFixableWarningCount = 0;
     let totalWarningCount = 0;
-    results.reduce((acc, result) => {
+    jsonResult.diagnostics.reduce((acc, result) => {
       totalErrorCount += result.severity === 'error' ? 1 : 0;
       totalWarningCount += result.severity === 'warning' ? 1 : 0;
 
@@ -228,6 +238,8 @@ export class OxlintLinter implements Linter {
 
   static create(options: OxlintOptions, { logger }: { logger: Logger }): Linter {
     const name = options.name || 'oxlint-linter';
+    // @ts-ignore Fixed in bit, need to be remove once this is merged and out
+    // https://github.com/teambit/bit/pull/9935
     return new OxlintLinter(name, logger, options);
   }
 

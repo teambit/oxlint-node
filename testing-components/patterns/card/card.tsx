@@ -24,7 +24,7 @@ export type CardProps = {
 /**
  * A simple card component.
  */
-export function Card({ children, className, title, content, ...rest }: CardProps) {
+export function Card({ children, className, title, ...rest }: CardProps) {
   return (
     <div {...rest} className={classNames(styles.card, className)}>
       <Heading>
